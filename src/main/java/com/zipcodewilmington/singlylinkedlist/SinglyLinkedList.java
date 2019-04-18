@@ -59,7 +59,7 @@ public class SinglyLinkedList {
         this(null);
     }
 
-    public boolean add_node(int id, String name){
+    public boolean push_front(int id, String name){
         // Push front.
         Node new_node = new Node(id, name); // Create new element.
 

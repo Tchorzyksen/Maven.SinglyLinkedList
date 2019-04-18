@@ -8,9 +8,9 @@ public class MainApplication {
 
         SinglyLinkedList myLinkedList=new SinglyLinkedList();
 
-        myLinkedList.add_node(97, "a");
-        myLinkedList.add_node(98, "b");
-        myLinkedList.add_node(99, "c");
+        myLinkedList.push_front(97, "a");
+        myLinkedList.push_front(98, "b");
+        myLinkedList.push_front(99, "c");
 
         myLinkedList.display_list();
 
