@@ -66,7 +66,7 @@ public class SinglyLinkedList {
     public SinglyLinkedList(SinglyLinkedList singlyLinkedList) { // Initialise list with already existing one.
         this.head = singlyLinkedList.getHead(); // Shallow Copy
         this.tail = singlyLinkedList.getTail();
-        this.element_count = singlyLinkedList.getElement_count();
+        this.element_count = singlyLinkedList.size();
     }
 
     public SinglyLinkedList(){
@@ -84,7 +84,7 @@ public class SinglyLinkedList {
         return tail;
     }
 
-    public int getElement_count() {
+    public int size() {
         return element_count;
     }
 
@@ -116,13 +116,28 @@ public class SinglyLinkedList {
         element_count++;
     }
 
+    public int find(int id){
+
+        int index=0;
+        for(Node traverse = this.head; traverse!=null; traverse=traverse.getNext_node()){
+
+            if(traverse.getId()==id)
+                return index;
+
+            index++;
+        }
+
+        return -1; // Failed to find element with given index.
+    }
+
     public void display_list(){
 
         Node traverse =this.head; // Preserve head. Create copy of head to traverse list.
 
+        int index=0;
         while(traverse!=null){
 
-            System.out.println("Id: " + traverse.getId()
+            System.out.println("Index: " + (index++) + "\t\tId: " + traverse.getId()
                     + "\t\tName: " + traverse.getName() + "\r");
 
             traverse=traverse.next_node;
