@@ -1,5 +1,7 @@
 package com.zipcodewilmington.singlylinkedlist;
 
+import java.util.NoSuchElementException;
+
 public class SinglyLinkedList {
 
     private class Node { // Inner class node declaration.
@@ -51,22 +53,67 @@ public class SinglyLinkedList {
 
     private Node head; // First element ref.
 
-    public SinglyLinkedList(Node head) { // Initialise list with already existing one.
-        this.head = head; // Shallow Copy
+    private Node tail; // Last element ref.
+
+    private int element_count; // Store number of elements.
+
+    private SinglyLinkedList(Node head, Node tail, int element_count) {
+        this.head = head;
+        this.tail = tail;
+        this.element_count = element_count;
+    }
+
+    public SinglyLinkedList(SinglyLinkedList singlyLinkedList) { // Initialise list with already existing one.
+        this.head = singlyLinkedList.getHead(); // Shallow Copy
+        this.tail = singlyLinkedList.getTail();
+        this.element_count = singlyLinkedList.getElement_count();
     }
 
     public SinglyLinkedList(){
-        this(null);
+        this(null, null, 0);
     }
 
-    public boolean push_front(int id, String name){
+    private Node getHead() {
+        if (this.head == null)
+            throw new NoSuchElementException();
+
+        return this.head;
+    }
+
+    private Node getTail() {
+        return tail;
+    }
+
+    public int getElement_count() {
+        return element_count;
+    }
+
+    public void push_front(int id, String name){
         // Push front.
         Node new_node = new Node(id, name); // Create new element.
 
-        new_node.setNext_node(this.head); // Set next element to head.
+        if(this.head==null) // Only one element inside list results in head and tail to point at the same node.
+            this.tail=new_node;
+        else
+            new_node.setNext_node(this.head); // Set next element to head.
+
         this.head=new_node; // Set head to new element.
 
-        return this.head.getId()==id;
+        element_count++;
+    }
+
+    public void push_back(int id, String name){
+
+        Node new_node = new Node(id, name);
+
+        if(this.head==null) // list empty add new element as head.
+            this.head = new_node;
+        else
+            this.tail.setNext_node(new_node);
+
+        this.tail = new_node;
+
+        element_count++;
     }
 
     public void display_list(){
@@ -76,7 +123,7 @@ public class SinglyLinkedList {
         while(traverse!=null){
 
             System.out.println("Id: " + traverse.getId()
-                    + "\tName: " + traverse.getName() + "\r");
+                    + "\t\tName: " + traverse.getName() + "\r");
 
             traverse=traverse.next_node;
         }
