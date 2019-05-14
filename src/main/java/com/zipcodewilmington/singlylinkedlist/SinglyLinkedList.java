@@ -69,7 +69,7 @@ public class SinglyLinkedList {
         this.element_count = singlyLinkedList.size();
     }
 
-    public SinglyLinkedList(){
+    public SinglyLinkedList(){ // Shallow copy...
         this(null, null, 0);
     }
 
@@ -81,7 +81,10 @@ public class SinglyLinkedList {
     }
 
     private Node getTail() {
-        return tail;
+        if (this.head == null)
+                throw new NoSuchElementException();
+
+        return this.tail;
     }
 
     public int size() {
@@ -128,6 +131,22 @@ public class SinglyLinkedList {
         }
 
         return -1; // Failed to find element with given index.
+    }
+
+    public Node removeFirst(){
+
+        if (this.head == null)
+            throw new NoSuchElementException();
+
+        Node f = this.head;
+
+        if (element_count == 1) {
+            this.tail = null;
+        }
+        this.head = this.head.next_node;
+        element_count--;
+
+        return f;
     }
 
     public void display_list(){

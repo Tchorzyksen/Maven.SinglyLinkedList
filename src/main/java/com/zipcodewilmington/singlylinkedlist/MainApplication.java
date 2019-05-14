@@ -19,6 +19,7 @@ public class MainApplication {
         System.out.println("Element with id 97\tis at index:\t" + myLinkedList.find(97));
         System.out.println("Element with id 99\tis at index:\t" + myLinkedList.find(99));
         System.out.println("Element with id 102\tis at index:\t" + myLinkedList.find(102));
+        System.out.println("Remove first element " + myLinkedList.removeFirst());
 
         myLinkedList.display_list();
         System.out.println("Number of elements inside list is: " + myLinkedList.size());
